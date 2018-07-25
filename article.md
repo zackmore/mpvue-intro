@@ -77,10 +77,80 @@ $ touch store/modules/notes.js
 
 ```
 // src/store/index.js
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import notes from './modules/notes'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  modules: {
+    notes
+  }
+})
 ```
+
+This is the store entry file, it includes a module named **notes**.
 
 ```
 // src/store/modules/notes.js
+
+const types = {
+  'NEW_NOTE': 'NEW_NOTE',
+  'UPDATE_NOTE': 'UPDATE_NOTE',
+  'REMOVE_NOTE': 'REMOVE_NOTE'
+}
+
+const state = {
+  notes: ['apple', 'banana', 'cherry']
+}
+
+const getters = {
+  notes: (state) => state.notes
+}
+
+const actions = {
+  newNote ({ commit }, note) {
+    commit(types.NEW_NOTE, note)
+  },
+
+  updateNote ({ commit }, index, note) {
+    commit(types.UPDATE_NOTE, { index, note })
+  },
+
+  removeNote ({ commit }, index) {
+    commit(types.REMOVE_NOTE, index)
+  }
+}
+
+const mutations = {
+  [types.NEW_NOTE] (state, note) {
+    const newNotes = state.notes.map(n => n)
+    newNotes.push(note)
+    state.notes = newNotes
+  },
+
+  [types.UPDATE_NOTE] (state, { index, note }) {
+    const newNotes = state.notes.map(n => n)
+    newNotes.splice(index, 1, note)
+    state.notes = newNotes
+  },
+
+  [types.REMOVE_NOTE] (state, index) {
+    const newNotes = state.notes.map(n => n)
+    newNotes.splice(index, 1)
+    state.notes = newNotes
+  }
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+}
 ```
 
 We defined the notes store module, along with the state, actions and mutations. 
@@ -93,6 +163,71 @@ $ mkdir notes
 $ touch notes/index.vue notes/main.js
 ```
 
+Then let us take a look at `src/main.js`, this is the entry file for whole app. You could change global configuration here. For now the most import configuration to us is the line starts with `pages:`. Change the line like this:
+
+```
+pages: ['^pages/notes/main'],
+```
+
+This means app homepage will be the notes page we just created.
+
+So what in notes files?
+
+```
+// src/pages/notes/main.js
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+import App from './index'
+import store from '../../store'
+
+Vue.use(Vuex)
+
+const app = new Vue({
+  store,
+  ...App
+})
+app.$mount()
+```
+
+Now we mounted the store in vue component.
+
+```
+// src/pages/notes/index.vue
+
+<template>
+  <div>
+    <h1>My Notes</h1>
+    <ul>
+      <li v-for="(note, idx) in notes" :key="idx">
+        {{ note }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  data() {
+    return {
+      newNote: ''
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'notes'
+    ])
+  }
+}
+</script>
+```
+
+We get the notes from state getters, and display them in a list. Just like this:
+
+![notes](imgs/4.png)
 
 ### Page
 

@@ -7,7 +7,7 @@ const types = {
 }
 
 const state = {
-  notes: []
+  notes: ['apple', 'banana', 'cherry']
 }
 
 const getters = {
