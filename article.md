@@ -1,14 +1,5 @@
 # Making Wechat Mini-Program with Vue.js - A Brief Introduction to mpvue
 
-```
-1. What is Wechat mini-program
-2. The official development kit is hard to use
-3. mpvue
-4. mpvue example: a note list
-   - wechat startup preparement
-   - the codes
-   - 
-```
 
 ## What is Wechat Mini-Program
 
@@ -44,6 +35,7 @@ Since almost every frontend developer loves `Vue.js`, why don't use `Vue.js` to 
 
 Now let's take a look at how to make a simple note list app for Wechat Mini-Program, with mpvue of course!
 
+### Init
 First of all, initializing the project.
 
 ```
@@ -55,19 +47,54 @@ $ npm run dev
 
 We created a new project from mpvue quickstart template and then started a build server in local. It will compile all source codes into a directory named **dist** in our new project path.
 
-Download the wechat developer tools from [https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html).
+Download the wechat developer tools from [the official site](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html).
 
 Install the developer tool, open it up, and choose Mini-Program Development.
 
 ![click the red circled one](imgs/1.png)
 
-In the next screen, let's select our project path and input the AppID.
+In the next screen, let's select our project path and input the AppID. (for more information about AppID, should check the [official docs](https://open.wechat.com/cgi-bin/newreadtemplate?t=overseas_open/index)).
 
 ![select dist path; input AppID](imgs/2.png)
 
 And you will get the **Hello World**.
 
 ![the developer tool](imgs/3.png)
+
+This is the quickstart demo page from mpvue template. You could goto the vuex demo page to check if vuex works.
+
+### Vuex
+
+Next let's make our notes store. In our project root directory:
+
+```
+$ cd src
+$ mkdir store
+$ touch store/index.js
+$ mkdir store/modules
+$ touch store/modules/notes.js
+```
+
+```
+// src/store/index.js
+```
+
+```
+// src/store/modules/notes.js
+```
+
+We defined the notes store module, along with the state, actions and mutations. 
+
+Now it's time to show the notes in UI.
+
+```
+$ cd src/pages
+$ mkdir notes
+$ touch notes/index.vue notes/main.js
+```
+
+
+### Page
 
 
 
