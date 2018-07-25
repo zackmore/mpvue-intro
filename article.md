@@ -2,17 +2,17 @@
 
 ## What is Wechat Mini-Program
 
-Wechat Mini-Program looks like normal apps, but they are in Wechat App, not in Android or iOS platform.
+Wechat Mini-Program looks like normal Apps, but they live in Wechat App, not in Android or iOS platform.
 
-Basically you could treat them like very light, small, only main function apps. compare to normal APP, Mini-Program got some differences:
+Basically you could see them as very light, small, main function only 'sub-app's. Compare to normal Apps, Mini-Program gets some differences:
 
-1. no need to install, just search, use, and close.
-2. limited by the size (max 2M for now), Mini-Program prefers offer only the main function, not like normal app with completed functions.
-3. the publishment of Mini-Program is managed by Tencent, not the Apple or Android Market.
+1. no need to install, search, use, and close.
+2. limited by the size (max 2M for now), Mini-Program prefers offer the main function only, not like normal Apps with completed functions.
+3. the publishment of Mini-Program is managed by Tencent, not the Apple or Android Markets.
 
-Since Wechat almost got a very large portion of Chinese market, the Mini-Program becomes popular in China too, and the developer number of Mini-Program increases too.
+Since Wechat already got a very large portion of Chinese market, the Mini-Program becomes popular in China too, and the developer number of Mini-Program increases.
 
-Wechat offered completed developer tool kit for developers to make Mini-Program. But in a developer opinion, it is not a good choice.
+Wechat offered completed developer tool kit for developers to make Mini-Program. But in a developer opinion this is not a good choice.
 
 
 ## Problems About the Official Development Kit
@@ -22,17 +22,17 @@ The main problem about Mini-Program native development kit is not very friendly 
 1. The basic codes of Mini-Program are 4 types of files:
 
 - `.json` configuration file, includes path / UI / network timeout / tab etc.
-- `.wxml` template file, for page structure, like HTML in web page.
-- `.wxss` style file, for page style, like CSS in web page.
+- `.wxml` template file, page structure, like HTML in web page.
+- `.wxss` style file, page style, like CSS in web page.
 - `.js` function file.
 
 The `.wxml` and `.wxss` are similar to `HTML` and `CSS` but still different, you need to learn about them.
 
-2. The codes are split into **Page**s, each **Page** contains its own `.json`, `.wxml`, `.wxss` and `.js` files. This is hard for code re-use.
+2. The codes are split into **Page**s, each **Page** contains its own `.json`, `.wxml`, `.wxss` and `.js` files. Hard for code re-use.
 
 3. No global state management. Only **Page** gets its own data object. So for a practical Mini-Program the developer needs to maintain a global data object as state and follow every single data changing manually, which is complicated and buggy.
 
-4. Hard to use third libraries. For example, if you want to use `lodash` in Mini-Program, you need to manually copy the entire library into project. And that means when you don't need the library it will make you to remove from codes manually too. Not even mention about the version, updating, codes committment issues.
+4. Hard to use third libraries. For example, if you want to use `lodash` in Mini-Program, you need to manually copy the entire library into project. And that means have to remove the library from codes manually when you don't need it. Not even mention about version, updating, codes committment issues.
 
 
 ## Here Comes mpvue to Help
@@ -68,11 +68,11 @@ In the next screen, let's select our project path and input the AppID. (for more
 
 ![select dist path; input AppID](imgs/2.png)
 
-And you will get the **Hello World**.
+And you will get the **Hello World** page.
 
 ![the developer tool](imgs/3.png)
 
-This is the quickstart demo page from mpvue template. You could goto the vuex demo page to check if vuex works.
+This is the quickstart demo page from mpvue template. You could also goto the vuex demo page to check if vuex works.
 
 ### Vuex
 
@@ -110,7 +110,6 @@ This is the store entry file, it includes a module named **notes**.
 
 const types = {
   'NEW_NOTE': 'NEW_NOTE',
-  'UPDATE_NOTE': 'UPDATE_NOTE',
   'REMOVE_NOTE': 'REMOVE_NOTE'
 }
 
@@ -127,10 +126,6 @@ const actions = {
     commit(types.NEW_NOTE, note)
   },
 
-  updateNote ({ commit }, index, note) {
-    commit(types.UPDATE_NOTE, { index, note })
-  },
-
   removeNote ({ commit }, index) {
     commit(types.REMOVE_NOTE, index)
   }
@@ -140,12 +135,6 @@ const mutations = {
   [types.NEW_NOTE] (state, note) {
     const newNotes = state.notes.map(n => n)
     newNotes.push(note)
-    state.notes = newNotes
-  },
-
-  [types.UPDATE_NOTE] (state, { index, note }) {
-    const newNotes = state.notes.map(n => n)
-    newNotes.splice(index, 1, note)
     state.notes = newNotes
   },
 
@@ -174,15 +163,15 @@ $ mkdir notes
 $ touch notes/index.vue notes/main.js
 ```
 
-Then let us take a look at `src/main.js`, this is the entry file for whole app. You could change global configuration here. For now the most import configuration to us is the line starts with `pages:`. Change the line like this:
+Take a look at `src/main.js`, this is the entry file for whole app. You could change global configuration here. For now the most import configuration is the line starts with `pages:`. Change the line to:
 
 ```
 pages: ['^pages/notes/main'],
 ```
 
-This means app homepage will be the notes page we just created.
+This means the homepage will be the notes page we just created.
 
-So what in notes files?
+So what's in notes files?
 
 ```
 // src/pages/notes/main.js
@@ -242,7 +231,7 @@ We get the notes from state getters, and display them in a list. Just like this:
 
 ### New Note
 
-When we check a note list, sometimes want to put down new note.
+When we check a note list, sometimes maybe want to put down new note.
 
 And this is new notes file:
 
@@ -294,10 +283,10 @@ export default {
 </script>
 ```
 
-There are some new changes:
+There are some changes:
 
 - an input box and button to submit new note
-- new method to handle new note submit
+- method to handle new note submit
 
 And now it will works like this:
 
@@ -369,14 +358,14 @@ And it works too:
 
 ### Stylized
 
-Finally lets make it pretty, and this note list app is done.
+Finally lets make it prettier(maybe?).
 
 ![the note list](imgs/7.gif)
 
 
 =========================
 
-All demo codes could be checked in [https://github.com/zackmore/mpvue-intro/tree/master/note-list](https://github.com/zackmore/mpvue-intro/tree/master/note-list).
+All demo codes are in [https://github.com/zackmore/mpvue-intro/tree/master/note-list](https://github.com/zackmore/mpvue-intro/tree/master/note-list).
 
 **References:**
 
