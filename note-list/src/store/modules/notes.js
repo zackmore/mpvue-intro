@@ -2,7 +2,6 @@
 
 const types = {
   'NEW_NOTE': 'NEW_NOTE',
-  'UPDATE_NOTE': 'UPDATE_NOTE',
   'REMOVE_NOTE': 'REMOVE_NOTE'
 }
 
@@ -15,12 +14,8 @@ const getters = {
 }
 
 const actions = {
-  newNote ({ commit }, note) {
+  addNewNote ({ commit }, note) {
     commit(types.NEW_NOTE, note)
-  },
-
-  updateNote ({ commit }, index, note) {
-    commit(types.UPDATE_NOTE, { index, note })
   },
 
   removeNote ({ commit }, index) {
@@ -32,12 +27,6 @@ const mutations = {
   [types.NEW_NOTE] (state, note) {
     const newNotes = state.notes.map(n => n)
     newNotes.push(note)
-    state.notes = newNotes
-  },
-
-  [types.UPDATE_NOTE] (state, { index, note }) {
-    const newNotes = state.notes.map(n => n)
-    newNotes.splice(index, 1, note)
     state.notes = newNotes
   },
 

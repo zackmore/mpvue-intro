@@ -6,22 +6,41 @@
         {{ note }}
       </li>
     </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <input type="text" v-model="noteText">
+    <button @click="addNote">+</button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
-      newNote: ''
+      noteText: ''
     }
   },
 
   computed: {
     ...mapGetters([
       'notes'
+    ])
+  },
+
+  methods: {
+    addNote() {
+      if (this.noteText.trim().length) {
+        this.addNewNote(this.noteText.trim())
+      }
+      this.noteText = ''
+    },
+
+    ...mapActions([
+      'addNewNote'
     ])
   }
 }

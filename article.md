@@ -212,7 +212,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      newNote: ''
+      noteText: ''
     }
   },
 
@@ -229,7 +229,66 @@ We get the notes from state getters, and display them in a list. Just like this:
 
 ![notes](imgs/4.png)
 
-### Page
+### New Note
 
+When we check a note list, sometimes want to put down new note.
 
+And this is new notes:
+
+```
+// src/pages/notes/index.vue
+
+<template>
+  <div>
+    <h1>My Notes</h1>
+    <ul>
+      <li v-for="(note, idx) in notes" :key="idx">
+        {{ note }}
+      </li>
+    </ul>
+    <input type="text" v-model="noteText">
+    <button @click="addNote">+</button>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  data() {
+    return {
+      noteText: ''
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'notes'
+    ])
+  },
+
+  methods: {
+    addNote() {
+      if (this.noteText.trim().length) {
+        this.addNewNote(this.noteText.trim())
+      }
+      this.noteText = ''
+    },
+
+    ...mapActions([
+      'addNewNote'
+    ])
+  }
+}
+</script>
+```
+
+There are some new changes:
+
+- an input box and button to submit new note
+- new method to handle new note submit
+
+And now it will works like this:
+
+![new note](imgs/5.gif)
 
