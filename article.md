@@ -1,7 +1,18 @@
 # Making Wechat Mini-Program with Vue.js - A Brief Introduction to mpvue
 
-
 ## What is Wechat Mini-Program
+
+Wechat Mini-Program looks like normal apps, but they are in Wechat App, not in Android or iOS platform.
+
+Basically you could treat them like very light, small, only main function apps. compare to normal APP, Mini-Program got some differences:
+
+1. no need to install, just search, use, and close.
+2. limited by the size (max 2M for now), Mini-Program prefers offer only the main function, not like normal app with completed functions.
+3. the publishment of Mini-Program is managed by Tencent, not the Apple or Android Market.
+
+Since Wechat almost got a very large portion of Chinese market, the Mini-Program becomes popular in China too, and the developer number of Mini-Program increases too.
+
+Wechat offered completed developer tool kit for developers to make Mini-Program. But in a developer opinion, it is not a good choice.
 
 
 ## Problems About the Official Development Kit
@@ -354,4 +365,22 @@ There is a new button for every note now. When click on it, it will call the rem
 
 And it works too:
 
-![new note](imgs/6.gif)
+![delete note](imgs/6.gif)
+
+### Stylized
+
+Finally lets make it pretty, and this note list app is done.
+
+![the note list](imgs/7.gif)
+
+
+=========================
+
+All demo codes could be checked in [https://github.com/zackmore/mpvue-intro/tree/master/note-list](https://github.com/zackmore/mpvue-intro/tree/master/note-list).
+
+**References:**
+
+- https://walkthechat.com/wechat-mini-programs-simple-introduction/
+- https://open.wechat.com/cgi-bin/newreadtemplate?t=overseas_open/docs/mini-programs/index#mini-programs_index
+- https://vuejs.org/
+- https://mpvue.com/
