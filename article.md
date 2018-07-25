@@ -65,7 +65,7 @@ In the next screen, let's select our project path and input the AppID.
 
 ![select dist path; input AppID](imgs/2.png)
 
-And you will get this.
+And you will get the **Hello World**.
 
 ![the developer tool](imgs/3.png)
 
