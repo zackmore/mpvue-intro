@@ -3,13 +3,10 @@
     <h1>My Notes</h1>
     <ul>
       <li v-for="(note, idx) in notes" :key="idx">
-        {{ note }}
+        <span>{{ note }}</span>
+        <b @click="deleteNote(idx)">-</b>
       </li>
     </ul>
-    <br>
-    <br>
-    <br>
-    <br>
     <input type="text" v-model="noteText">
     <button @click="addNote">+</button>
   </div>
@@ -39,8 +36,13 @@ export default {
       this.noteText = ''
     },
 
+    deleteNote(index) {
+      this.removeNote(index)
+    },
+
     ...mapActions([
-      'addNewNote'
+      'addNewNote',
+      'removeNote'
     ])
   }
 }

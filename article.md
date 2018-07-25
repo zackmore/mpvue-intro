@@ -233,7 +233,7 @@ We get the notes from state getters, and display them in a list. Just like this:
 
 When we check a note list, sometimes want to put down new note.
 
-And this is new notes:
+And this is new notes file:
 
 ```
 // src/pages/notes/index.vue
@@ -292,3 +292,16 @@ And now it will works like this:
 
 ![new note](imgs/5.gif)
 
+### Remove Note
+
+When we need to remove note. Check the new notes file:
+
+```
+// src/pages/notes/index.vue
+```
+
+There is a new button for every note now. When click on it, it will call the remove note function with index.
+
+And it works too:
+
+![new note](imgs/6.gif)
